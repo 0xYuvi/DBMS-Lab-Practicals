@@ -67,7 +67,30 @@ CREATE TABLE Access (
 );
 ```
 
-### Step 2: Queries for Question 1
+### Step 2: Insert Sample Data
+```sql
+INSERT INTO Users (user_id, name, age, gender, username) VALUES 
+(1, 'Geeta', 20, 'Female', 'geeta20'),
+(2, 'Sam', 25, 'Male', 'sam_dev'),
+(3, 'Sarah', 30, 'Female', 'sarah_m'),
+(4, 'Peter', 22, 'Male', 'peter99'),
+(5, 'RahulR', 28, 'Male', 'rahulr');
+
+INSERT INTO Websites (website_id, name, url, type, size) VALUES
+(101, 'EduSite', 'www.edusite.com', 'educational', 'large'),
+(102, 'FunVid', 'www.funvid.com', 'entertainment', 'medium'),
+(103, 'NewsDaily', 'www.newsdaily.com', 'news', 'small'),
+(104, 'LearnIt', 'www.learnit.com', 'educational', 'medium');
+
+INSERT INTO Access (user_id, website_id, date_of_access, time_of_access) VALUES
+(1, 101, '2025-10-10', '10:30:00'),
+(2, 102, '2025-10-10', '11:15:00'),
+(1, 102, '2025-10-11', '14:20:00'),
+(3, 101, '2025-10-12', '09:00:00'),
+(5, 104, '2025-10-12', '16:45:00');
+```
+
+### Step 3: Queries for Question 1
 ```sql
 -- 1. Display names of users starting with letter S.
 SELECT name FROM Users WHERE name LIKE 'S%';
@@ -98,7 +121,7 @@ END //
 DELIMITER ;
 ```
 
-### Step 3: Queries for Question 2
+### Step 4: Queries for Question 2
 ```sql
 -- 1. Display names of users ending with letter R.
 SELECT name FROM Users WHERE name LIKE '%R';
@@ -241,7 +264,22 @@ CREATE TABLE Visit (
 );
 ```
 
-### Step 2: Queries
+### Step 2: Insert Sample Data
+```sql
+INSERT INTO Patient (Pid, name, gender, DOB, address, telephoneno, bloodgroup) VALUES
+(1, 'John Doe', 'Male', '1990-05-15', '123 Main St', 9876543210, 'O+'),
+(2, 'Jane Smith', 'Female', '1985-08-20', '456 Oak Ave', 9876543211, 'A-'),
+(3, 'Bob Brown', 'Male', '2000-11-10', '789 Pine Rd', 9876543212, 'B+'),
+(4, 'Alice Green', 'Female', '1995-02-25', '321 Elm St', 9876543213, 'O+');
+
+INSERT INTO Visit (Pid, dateofvisit, diagnosis, medicine, feespaid) VALUES
+(1, '2025-10-01', 'Fever', 'Paracetamol', 500.00),
+(1, '2025-10-10', 'Follow up', 'Vitamins', 300.00),
+(2, '2025-10-05', 'Cough', 'Cough Syrup', 400.00),
+(4, '2025-10-12', 'Headache', 'Aspirin', 500.00);
+```
+
+### Step 3: Queries
 ```sql
 -- 1. Alter data type of telephone no. from int to bigint
 ALTER TABLE Patient MODIFY telephoneno BIGINT;
@@ -332,7 +370,32 @@ CREATE TABLE Teaches (
 );
 ```
 
-### Step 2: Queries
+### Step 2: Insert Sample Data
+```sql
+INSERT INTO Department (dept_name, building, budget) VALUES
+('Computer Science', 'Turing', 100000.00),
+('Physics', 'Newton', 85000.00),
+('IT', 'Lovelace', 95000.00);
+
+INSERT INTO Instructor (inst_id, name, salary, dept_name) VALUES
+(101, 'Prof. Smith', 25000.00, 'Computer Science'),
+(102, 'Dr. Jones', 28000.00, 'IT'),
+(103, 'Prof. Davis', 35000.00, 'Physics'),
+(104, 'Dr. Evans', 22000.00, 'IT');
+
+INSERT INTO Course (course_id, title, credits, dept_name) VALUES
+('CS101', 'Intro to Programming', 4, 'Computer Science'),
+('IT201', 'Database Systems', 3, 'IT'),
+('PH101', 'Mechanics', 4, 'Physics');
+
+INSERT INTO Teaches (course_id, inst_id) VALUES
+('CS101', 101),
+('IT201', 102),
+('IT201', 104),
+('PH101', 103);
+```
+
+### Step 3: Queries
 ```sql
 -- 1. Find the names of all departments whose name starts with “ p ”.
 SELECT dept_name FROM Department WHERE dept_name LIKE 'P%';
@@ -433,7 +496,22 @@ CREATE TABLE Emp (
 );
 ```
 
-### Step 2: Queries
+### Step 2: Insert Sample Data
+```sql
+INSERT INTO Dept (Dept_id, Dname, Loc) VALUES
+(10, 'HR', 'New York'),
+(20, 'Engineering', 'San Francisco'),
+(30, 'Sales', 'Chicago');
+
+INSERT INTO Emp (Emp_id, Ename, desg, qual, Salary, mob_no, Dept_id, age) VALUES
+(1, 'Samir', 'Manager', 'MBA', 45000.00, '9876543210', 10, 45),
+(2, 'Sara', 'Engineer', 'BTech', 25000.00, '9876543211', 20, 28),
+(3, 'John', 'Analyst', 'BSc', 22000.00, '9876543212', 20, 35),
+(4, 'Sanjay', 'Sales Rep', 'BBA', 28000.00, '9876543213', 30, 39),
+(5, 'Amit', 'Sr. Engineer', 'MTech', 35000.00, '9876543214', 20, 42);
+```
+
+### Step 3: Queries
 ```sql
 -- 1. Find the names of all employees whose name starts with ‘Sa’.
 SELECT Ename FROM Emp WHERE Ename LIKE 'Sa%';
@@ -503,6 +581,15 @@ CREATE TABLE Books (
     Author_ID INT,
     FOREIGN KEY (Author_ID) REFERENCES Authors(Author_ID)
 );
+
+-- Insert Sample Data
+INSERT INTO Authors (Author_ID, Name) VALUES 
+(1, 'J.K. Rowling'),
+(2, 'George R.R. Martin');
+
+INSERT INTO Books (Book_ID, Title, Price, Author_ID) VALUES 
+(101, 'Harry Potter', 500.00, 1),
+(102, 'Game of Thrones', 750.00, 2);
 ```
 
 ### Question 14: Hostel Management System
@@ -545,6 +632,15 @@ CREATE TABLE Students (
     Hostel_ID INT,
     FOREIGN KEY (Hostel_ID) REFERENCES Hostels(Hostel_ID)
 );
+
+-- Insert Sample Data
+INSERT INTO Hostels (Hostel_ID, Name, Capacity) VALUES 
+(1, 'Boys Hostel A', 100),
+(2, 'Girls Hostel B', 120);
+
+INSERT INTO Students (Student_ID, Name, Age, Hostel_ID) VALUES 
+(101, 'Ravi Kumar', 20, 1),
+(102, 'Priya Sharma', 19, 2);
 ```
 
 ### Question 15: Hotel Management System
@@ -584,6 +680,15 @@ CREATE TABLE Rooms (
     Type VARCHAR(50),
     Price DECIMAL(10,2) CHECK (Price > 0)
 );
+
+-- Insert Sample Data
+INSERT INTO Guests (Guest_ID, Name, Phone) VALUES 
+(1, 'Amit Patel', '9876543210'),
+(2, 'Neha Gupta', '9876543211');
+
+INSERT INTO Rooms (Room_No, Type, Price) VALUES 
+(101, 'Deluxe', 2500.00),
+(102, 'Suite', 5000.00);
 ```
 
 ### Question 16: Library Management System
@@ -623,4 +728,13 @@ CREATE TABLE Books (
     Title VARCHAR(100) NOT NULL,
     Status VARCHAR(20) DEFAULT 'Available'
 );
+
+-- Insert Sample Data
+INSERT INTO Members (Member_ID, Name, JoinDate) VALUES 
+(1, 'Rohan Verma', '2025-01-15'),
+(2, 'Kriti Sanon', '2025-03-10');
+
+INSERT INTO Books (Book_ID, Title, Status) VALUES 
+(101, 'Database Concepts', 'Available'),
+(102, 'Operating Systems', 'Issued');
 ```
